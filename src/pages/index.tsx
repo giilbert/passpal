@@ -1,9 +1,9 @@
-import { Heading } from '@chakra-ui/react';
+import Navbar from '@components/Navbar';
 
 function IndexPage() {
   return (
     <>
-      <Heading>Hello world!</Heading>
+      <Navbar />
     </>
   );
 }
