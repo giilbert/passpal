@@ -1,11 +1,7 @@
-import Navbar from '@components/Navbar';
+import Link from 'next/link';
 
 function IndexPage() {
-  return (
-    <>
-      <Navbar />
-    </>
-  );
+  return <Link href="/app">Go to the app</Link>;
 }
 
 export default IndexPage;

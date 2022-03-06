@@ -40,7 +40,10 @@ function NavItem({ name, url, icon }: NavItemProps) {
         display="flex"
         alignItems="center"
       >
-        {cloneElement(icon)}
+        {cloneElement<IconProps>(icon, {
+          width: 5,
+          height: 5,
+        })}
         <Text ml="4" fontSize="xl">
           {name}
         </Text>

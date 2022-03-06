@@ -1,10 +1,6 @@
 import {
-  Flex,
-  Box,
-  Text,
   useDisclosure,
   Button,
-  FlexProps,
   Drawer,
   DrawerBody,
   DrawerContent,
@@ -19,8 +15,9 @@ import {
   HamburgerIcon,
   LockIcon,
 } from '@chakra-ui/icons';
-import { motion, Variants } from 'framer-motion';
 import NavItem from './NavItem';
+import { signOut } from 'next-auth/react';
+import AuthDisplay from './AuthDisplay';
 
 function Navbar() {
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -36,13 +33,15 @@ function Navbar() {
           <DrawerCloseButton onClick={onClose} mt="3" />
         </DrawerHeader>
         <DrawerBody p="1">
-          <NavItem name="Home" url="/" icon={<ArrowRightIcon />} />
+          <NavItem name="Home" url="/app" icon={<ArrowRightIcon />} />
           <NavItem name="Passwords" url="/passwords" icon={<LockIcon />} />
           <NavItem
-            name="Create A Password"
-            url="/generate"
+            name="Generate Password"
+            url="/generate-password"
             icon={<EditIcon />}
           />
+
+          <AuthDisplay />
         </DrawerBody>
       </DrawerContent>
     </Drawer>
