@@ -8,15 +8,10 @@ import {
   DrawerOverlay,
   DrawerCloseButton,
   Heading,
+  useBreakpointValue,
 } from '@chakra-ui/react';
-import {
-  ArrowRightIcon,
-  EditIcon,
-  HamburgerIcon,
-  LockIcon,
-} from '@chakra-ui/icons';
+import { ArrowRightIcon, EditIcon, HamburgerIcon } from '@chakra-ui/icons';
 import NavItem from './NavItem';
-import { signOut } from 'next-auth/react';
 import AuthDisplay from './AuthDisplay';
 
 function Navbar() {
@@ -34,13 +29,11 @@ function Navbar() {
         </DrawerHeader>
         <DrawerBody p="1">
           <NavItem name="Home" url="/app" icon={<ArrowRightIcon />} />
-          <NavItem name="Passwords" url="/passwords" icon={<LockIcon />} />
           <NavItem
             name="Generate Password"
             url="/generate-password"
             icon={<EditIcon />}
           />
-
           <AuthDisplay />
         </DrawerBody>
       </DrawerContent>
@@ -49,6 +42,27 @@ function Navbar() {
 }
 
 function OpenButton({ open }: { open: () => void }) {
+  const isMobile = useBreakpointValue({
+    base: true,
+    md: false,
+  });
+
+  if (isMobile)
+    return (
+      <Button
+        onClick={() => {
+          open();
+        }}
+        m="3"
+        colorScheme="teal"
+        position="fixed"
+        top="0"
+        left="0"
+      >
+        <HamburgerIcon />
+      </Button>
+    );
+
   return (
     <Button
       onClick={() => {
@@ -57,6 +71,9 @@ function OpenButton({ open }: { open: () => void }) {
       leftIcon={<HamburgerIcon />}
       m="3"
       colorScheme="teal"
+      position="fixed"
+      top="0"
+      left="0"
     >
       Menu
     </Button>
