@@ -45,7 +45,14 @@ function AppPage() {
 const DesktopPageLayout = () => (
   <Grid templateColumns="5fr 3fr" gap="3" ml="32" mr="3" mt="3">
     <GridItem w="100%">
-      <PasswordsDisplay />
+      <PasswordsDisplay
+        passwords={[
+          { name: 'name1', login: 'login1', password: 'password123' },
+          { name: 'name2', login: 'login2', password: 'password123' },
+          { name: 'name3', login: 'login3', password: 'password123' },
+          { name: 'name4', login: 'login4', password: 'password123' },
+        ]}
+      />
     </GridItem>
     <GridItem w="100%">
       <SidePasswordDisplay />
@@ -56,7 +63,14 @@ const DesktopPageLayout = () => (
 const MobilePageLayout = () => (
   <>
     <Box ml="20" pr="3" pt="3">
-      <PasswordsDisplay />
+      <PasswordsDisplay
+        passwords={[
+          { name: 'name1', login: 'login1', password: 'password123' },
+          { name: 'name2', login: 'login2', password: 'password123' },
+          { name: 'name3', login: 'login3', password: 'password123' },
+          { name: 'name4', login: 'login4', password: 'password123' },
+        ]}
+      />
     </Box>
 
     <SidePasswordDisplay />
