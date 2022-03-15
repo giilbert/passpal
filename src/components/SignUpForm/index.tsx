@@ -28,13 +28,22 @@ const SignUpForm = () => {
         validationSchema={accountCreationSchema}
         onSubmit={async (values, formikHelpers) => {
           formikHelpers.setSubmitting(true);
-          const res = await axios.post('/api/auth/sign-up', values);
-          formikHelpers.setSubmitting(true);
 
-          if (res.status === 200) {
+          const { status, data } = await axios.post(
+            '/api/auth/sign-up',
+            values,
+            {
+              validateStatus: (x) => x >= 200 && x < 500,
+            }
+          );
+          formikHelpers.setSubmitting(false);
+
+          console.log(status, data);
+
+          if (status === 200) {
             window.location.href = '/sign-in';
-          } else if (res.status === 400) {
-            setFormErrors('Malformed fields.');
+          } else if (status === 400 && data.error) {
+            setFormErrors(data.error);
           } else {
             setFormErrors('Something went wrong.');
           }

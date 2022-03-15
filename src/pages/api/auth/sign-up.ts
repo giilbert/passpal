@@ -6,6 +6,7 @@ import { hash } from 'bcrypt';
 const prisma = new PrismaClient();
 
 async function signUpHandler(req: NextApiRequest, res: NextApiResponse) {
+  // validate sign up information
   if (!accountCreationSchema.isValid(req.body)) {
     res.status(400).json({
       error: 'Malformed data.',
@@ -15,6 +16,21 @@ async function signUpHandler(req: NextApiRequest, res: NextApiResponse) {
 
   await prisma.$connect();
 
+  // check if user with email already exists
+  const user = await prisma.user.findUnique({
+    where: {
+      email: req.body.email,
+    },
+  });
+
+  if (user) {
+    res.status(400).json({
+      error: 'User with specified Email already exists.',
+    });
+    return;
+  }
+
+  // if not, create a new user
   await prisma.user.create({
     data: {
       email: req.body.email,
