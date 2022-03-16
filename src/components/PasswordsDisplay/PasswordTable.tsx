@@ -17,8 +17,8 @@ function PasswordTable({ filteredPasswords }: PasswordTableProps) {
       </Thead>
 
       <Tbody>
-        {filteredPasswords.map((p) => (
-          <PasswordCard decryptedPassword={p} />
+        {filteredPasswords.map((p, i) => (
+          <PasswordCard decryptedPassword={p} key={i} />
         ))}
       </Tbody>
     </Table>
