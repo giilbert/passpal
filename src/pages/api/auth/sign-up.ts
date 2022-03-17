@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@prisma/client';
 import { accountCreationSchema } from '@utils/patterns';
-import { hash } from 'bcrypt';
+import { hash } from 'argon2';
 
 const prisma = new PrismaClient();
 
@@ -35,7 +35,9 @@ async function signUpHandler(req: NextApiRequest, res: NextApiResponse) {
     data: {
       email: req.body.email,
       name: req.body.name,
-      password: await hash(req.body.password, 12),
+      password: await hash(req.body.password, {
+        saltLength: 15,
+      }),
     },
   });
 

@@ -3,22 +3,18 @@ import {
   Box,
   BoxProps,
   Button,
-  Container,
-  IconProps,
-  Link,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
-  Text,
 } from '@chakra-ui/react';
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { signOut, useSession } from 'next-auth/react';
 import UserProfileIcon from './UserProfileIcon';
 const AnimatedBox = motion<BoxProps>(Box);
 
 function AuthDisplay() {
-  const { data: session, status } = useSession({
+  const { data: session } = useSession({
     required: false,
   });
 

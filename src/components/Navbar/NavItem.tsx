@@ -1,11 +1,4 @@
-import {
-  Box,
-  BoxProps,
-  Container,
-  IconProps,
-  Link,
-  Text,
-} from '@chakra-ui/react';
+import { Box, BoxProps, IconProps, Text } from '@chakra-ui/react';
 import { motion, Variants } from 'framer-motion';
 import NextLink from 'next/link';
 import { cloneElement, ReactElement } from 'react';

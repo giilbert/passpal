@@ -1,7 +1,7 @@
-import NextAuth, { Session, User } from 'next-auth';
+import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import { PrismaClient } from '.prisma/client';
-import { compare } from 'bcrypt';
+import { verify } from 'argon2';
 import { userCredentialsSchema } from '@utils/patterns';
 
 const prisma = new PrismaClient();
@@ -45,7 +45,7 @@ export default NextAuth({
         await prisma.$disconnect();
 
         // check if passwords match
-        if ((await compare(credentials.password, user.password)) === false)
+        if ((await verify(user.password, credentials.password)) === false)
           return null;
 
         return {
