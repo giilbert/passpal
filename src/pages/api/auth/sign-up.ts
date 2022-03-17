@@ -27,6 +27,7 @@ async function signUpHandler(req: NextApiRequest, res: NextApiResponse) {
     res.status(400).json({
       error: 'User with specified Email already exists.',
     });
+    await prisma.$disconnect();
     return;
   }
 

@@ -40,9 +40,8 @@ export default NextAuth({
           },
         });
 
-        if (!user) return null;
-
         await prisma.$disconnect();
+        if (!user) return null;
 
         // check if passwords match
         if ((await verify(user.password, credentials.password)) === false)
