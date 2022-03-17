@@ -1,15 +1,16 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["mongoDb"]
+  provider = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
-  provider = "mongodb"
-  url      = env("MONGO_DB_URL")
+  provider = "mysql"
+  url = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
 }
 
 model User {
-  id        String   @id @map("_id") @default(auto()) @db.ObjectId
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   name      String
   email     String   @unique
