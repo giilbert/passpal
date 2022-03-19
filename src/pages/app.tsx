@@ -1,4 +1,5 @@
 import { Box, Grid, GridItem, useBreakpointValue } from '@chakra-ui/react';
+import MasterPasswordPrompt from '@components/MasterPasswordPrompt';
 import Navbar from '@components/Navbar';
 import PasswordsDisplay from '@components/PasswordsDisplay';
 import SidePasswordDisplay from '@components/SidePasswordDisplay';
@@ -28,6 +29,7 @@ function AppPage() {
   return (
     <>
       <Navbar />
+      <MasterPasswordPrompt />
 
       <PageContext.Provider
         value={{

@@ -30,4 +30,10 @@ const userCredentialsSchema = Yup.object({
   password: Yup.string().required('Password is required'),
 });
 
-export { accountCreationSchema, userCredentialsSchema };
+const passwordCreationSchema = Yup.object({
+  website: Yup.string().url('Website must be a valid URL').notRequired(),
+  login: Yup.string().required('A login is required'),
+  password: Yup.string().required('A password is required'),
+});
+
+export { accountCreationSchema, userCredentialsSchema, passwordCreationSchema };

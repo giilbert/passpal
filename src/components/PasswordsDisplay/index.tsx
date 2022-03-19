@@ -1,11 +1,13 @@
 import { SearchIcon } from '@chakra-ui/icons';
 import {
   Box,
+  HStack,
   Input,
   InputGroup,
   InputLeftElement,
   Text,
 } from '@chakra-ui/react';
+import AddPassword from '@components/AddPassword';
 import { DecryptedPassword } from '@utils/types/DecryptedPassword';
 import { useState } from 'react';
 import PasswordTable from './PasswordTable';
@@ -20,18 +22,23 @@ function PasswordsDisplay({ passwords }: PasswordsDisplayProps) {
 
   return (
     <Box>
-      <InputGroup>
-        <InputLeftElement
-          pointerEvents="none"
-          children={<SearchIcon color="gray.300" />}
-        />
-        <Input
-          variant="filled"
-          placeholder="Search"
-          onChange={(e) => setFilter(e.target.value)}
-          value={filter}
-        />
-      </InputGroup>
+      {/* Top */}
+      <HStack>
+        {/* Search bar */}
+        <InputGroup>
+          <InputLeftElement
+            pointerEvents="none"
+            children={<SearchIcon color="gray.300" />}
+          />
+          <Input
+            variant="filled"
+            placeholder="Search"
+            onChange={(e) => setFilter(e.target.value)}
+            value={filter}
+          />
+        </InputGroup>
+        <AddPassword />
+      </HStack>
 
       {filteredPasswords.length !== 0 ? (
         <PasswordTable filteredPasswords={filteredPasswords} />

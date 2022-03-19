@@ -3,65 +3,62 @@ import {
   FormLabel,
   Input,
   FormErrorMessage,
-  Button,
-  Text,
   InputGroup,
   InputRightElement,
+  Button,
+  Text,
 } from '@chakra-ui/react';
-import { userCredentialsSchema } from '@utils/patterns';
-import { Formik, Form, Field } from 'formik';
-import { signIn } from 'next-auth/react';
+import { getMasterPassword } from '@components/MasterPasswordPrompt/getMasterPassword';
+import { passwordCreationSchema } from '@utils/patterns';
+import { Field, Form, Formik } from 'formik';
 import { useState } from 'react';
 
-function SignInForm() {
+function AddPasswordForm() {
   const [formError, setFormError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <Formik
       initialValues={{
-        email: '',
+        website: '',
+        login: '',
         password: '',
       }}
-      validationSchema={userCredentialsSchema}
+      validationSchema={passwordCreationSchema}
       onSubmit={async (values) => {
-        await signIn('credentials', {
-          email: values.email,
-          password: values.password,
-          redirect: false,
-        }).then(async (result) => {
-          if (result.ok) {
-            window.location.href = '/app';
-            // also hash and store master password in localStorage
-            const buf = await crypto.subtle.digest(
-              'SHA-256',
-              new TextEncoder().encode(values.password)
-            );
-            const hashed = Array.prototype.map
-              .call(new Uint8Array(buf), (x: number) =>
-                ('00' + x.toString(16)).slice(-2)
-              )
-              .join('');
+        // prompts the user for their master password and validates it
+        const masterPassword = await getMasterPassword();
 
-            localStorage.setItem('master-password-hashed', hashed);
-          } else if (result.status === 401)
-            setFormError('Invalid email or password');
-          else if (result.status !== 401) setFormError('An error occured');
-        });
+        if (!masterPassword) {
+          setFormError('Canceled');
+          return;
+        }
+
+        // TODO: encrypt and send to server storage
       }}
     >
-      {({ errors, isSubmitting, setFieldValue, touched }) => (
+      {({ errors, isSubmitting, touched }) => (
         <Form>
-          <Field name="email">
+          <Field name="website">
+            {({ field }) => (
+              <FormControl isInvalid={errors.website && touched.website} mb="4">
+                <FormLabel htmlFor="website">Website</FormLabel>
+                <Input {...field} id="website" />
+                <FormErrorMessage>{errors.website}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+
+          <Field name="login">
             {({ field }) => (
               <FormControl
-                isInvalid={errors.email && touched.email}
+                isInvalid={errors.login && touched.login}
                 isRequired
                 mb="4"
               >
-                <FormLabel htmlFor="email">Email</FormLabel>
-                <Input {...field} id="email" />
-                <FormErrorMessage>{errors.email}</FormErrorMessage>
+                <FormLabel htmlFor="login">Login</FormLabel>
+                <Input {...field} id="login" />
+                <FormErrorMessage>{errors.login}</FormErrorMessage>
               </FormControl>
             )}
           </Field>
@@ -106,7 +103,7 @@ function SignInForm() {
             isLoading={isSubmitting}
             mb="2"
           >
-            Sign In
+            Add
           </Button>
         </Form>
       )}
@@ -114,4 +111,4 @@ function SignInForm() {
   );
 }
 
-export default SignInForm;
+export default AddPasswordForm;
