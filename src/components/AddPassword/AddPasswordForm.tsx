@@ -9,11 +9,19 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { getMasterPassword } from '@components/MasterPasswordPrompt/getMasterPassword';
+import {
+  decodePassword,
+  decryptPassword,
+  encryptPassword,
+} from '@utils/passwordEncryption';
 import { passwordCreationSchema } from '@utils/patterns';
+import axios from 'axios';
 import { Field, Form, Formik } from 'formik';
 import { useState } from 'react';
 
-function AddPasswordForm() {
+const CREATE_PASSWORD_ENDPOINT = '/api/create-password';
+
+function AddPasswordForm({ close }: { close: () => void }) {
   const [formError, setFormError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
@@ -25,16 +33,27 @@ function AddPasswordForm() {
         password: '',
       }}
       validationSchema={passwordCreationSchema}
-      onSubmit={async (values) => {
+      onSubmit={async (values, helpers) => {
         // prompts the user for their master password and validates it
         const masterPassword = await getMasterPassword();
-
+        // if the user cancels entering their master password
         if (!masterPassword) {
           setFormError('Canceled');
           return;
         }
 
-        // TODO: encrypt and send to server storage
+        const encrypted = await encryptPassword(values.password);
+
+        const res = await axios.post(CREATE_PASSWORD_ENDPOINT, {
+          ...values,
+          password: encrypted,
+        });
+
+        if (res.status === 200) {
+          close();
+        } else {
+          setFormError('An error occurred.');
+        }
       }}
     >
       {({ errors, isSubmitting, touched }) => (

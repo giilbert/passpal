@@ -38,8 +38,6 @@ const SignUpForm = () => {
           );
           formikHelpers.setSubmitting(false);
 
-          console.log(status, data);
-
           if (status === 200) {
             window.location.href = '/sign-in';
           } else if (status === 400 && data.error) {

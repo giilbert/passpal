@@ -25,7 +25,7 @@ function AddPassword() {
           <ModalHeader>Add Password</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <AddPasswordForm />
+            <AddPasswordForm close={onClose} />
           </ModalBody>
         </ModalContent>
       </Modal>
