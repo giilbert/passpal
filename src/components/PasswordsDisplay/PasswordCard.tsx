@@ -1,14 +1,15 @@
 import { Td, Tr } from '@chakra-ui/react';
+import { Password } from '@prisma/client';
 import { DecryptedPassword } from '@utils/types/DecryptedPassword';
 import { PageContext } from 'pages/app';
 import { useContext } from 'react';
 
 interface PasswordCardProps {
-  decryptedPassword: DecryptedPassword;
+  password: Password;
 }
 
-function PasswordCard({ decryptedPassword }: PasswordCardProps) {
-  const { name, login } = decryptedPassword;
+function PasswordCard({ password }: PasswordCardProps) {
+  const { website, login } = password;
   const { setSidePasswordDisplay } = useContext(PageContext);
 
   return (
@@ -18,10 +19,10 @@ function PasswordCard({ decryptedPassword }: PasswordCardProps) {
         boxShadow: '-4px 0px teal',
       }}
       transition="box-shadow 500ms cubic-bezier(0.33, 1, 0.68, 1)"
-      onClick={() => setSidePasswordDisplay(decryptedPassword)}
+      onClick={() => setSidePasswordDisplay(password)}
     >
-      <Td>{name}</Td>
       <Td>{login}</Td>
+      <Td>{website}</Td>
     </Tr>
   );
 }

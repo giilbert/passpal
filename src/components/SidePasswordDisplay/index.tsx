@@ -16,6 +16,8 @@ import {
   useBreakpointValue,
   useOutsideClick,
 } from '@chakra-ui/react';
+import { Password } from '@prisma/client';
+import { decryptPassword } from '@utils/passwordEncryption';
 import { DecryptedPassword } from '@utils/types/DecryptedPassword';
 import { PageContext } from 'pages/app';
 import { useContext, useRef } from 'react';
@@ -71,10 +73,10 @@ function SidePasswordDisplay() {
   );
 }
 
-const Content = ({ name, login, password }: DecryptedPassword) => {
+const Content = ({ website, login, password }: Password) => {
   return (
     <>
-      <Heading my="5">{name}</Heading>
+      <Heading my="5">{website}</Heading>
 
       {/* login info */}
       <InputGroup size="md">
@@ -99,7 +101,7 @@ const Content = ({ name, login, password }: DecryptedPassword) => {
       {/* password info */}
       <InputGroup size="md" mt="2">
         <InputLeftAddon children="Password" />
-        <Input type="password" value={password} disabled />
+        <Input type="password" value={'*'.repeat(12)} disabled />
         <InputRightElement width="6rem" mr="2">
           <Button h="1.75rem" size="sm">
             <EditIcon />
@@ -113,7 +115,7 @@ const Content = ({ name, login, password }: DecryptedPassword) => {
             h="1.75rem"
             size="sm"
             colorScheme="teal"
-            onClick={() => copy(password)}
+            onClick={async () => copy(await decryptPassword(password))}
           >
             <CopyIcon />
           </Button>

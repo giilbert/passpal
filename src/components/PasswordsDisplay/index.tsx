@@ -11,14 +11,20 @@ import AddPassword from '@components/AddPassword';
 import { DecryptedPassword } from '@utils/types/DecryptedPassword';
 import { useState } from 'react';
 import PasswordTable from './PasswordTable';
+import { fetcher } from '@utils/fetcher';
+import useSWR from 'swr';
+import { Password } from '@prisma/client';
 
-interface PasswordsDisplayProps {
-  passwords: DecryptedPassword[];
-}
-
-function PasswordsDisplay({ passwords }: PasswordsDisplayProps) {
+function PasswordsDisplay() {
+  const { data: passwords, error } = useSWR<Password[]>(
+    '/api/get-passwords',
+    fetcher
+  );
   const [filter, setFilter] = useState<string>();
   const filteredPasswords = filterPasswords(passwords, filter);
+
+  if (!passwords) return <Text>Loading</Text>;
+  if (error) return <Text>Error</Text>;
 
   return (
     <Box>
@@ -49,11 +55,11 @@ function PasswordsDisplay({ passwords }: PasswordsDisplayProps) {
   );
 }
 
-function filterPasswords(passwords: DecryptedPassword[], filter: string) {
+function filterPasswords(passwords: Password[], filter: string) {
   if (filter === '' || !filter) return passwords;
   // passwords with logins which contain the filter
-  return passwords.filter(({ login, name }) => {
-    return login.includes(filter) || name.includes(filter);
+  return passwords.filter(({ login, website }) => {
+    return login.includes(filter) || website.includes(filter);
   });
 }
 

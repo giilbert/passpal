@@ -1,9 +1,10 @@
 import { Table, Tbody, Th, Thead, Tr } from '@chakra-ui/react';
+import { Password } from '@prisma/client';
 import { DecryptedPassword } from '@utils/types/DecryptedPassword';
 import PasswordCard from './PasswordCard';
 
 interface PasswordTableProps {
-  filteredPasswords: DecryptedPassword[];
+  filteredPasswords: Password[];
 }
 
 function PasswordTable({ filteredPasswords }: PasswordTableProps) {
@@ -11,14 +12,14 @@ function PasswordTable({ filteredPasswords }: PasswordTableProps) {
     <Table variant="striped" colorScheme="orange">
       <Thead>
         <Tr>
-          <Th>Name</Th>
           <Th>Login</Th>
+          <Th>Website</Th>
         </Tr>
       </Thead>
 
       <Tbody>
         {filteredPasswords.map((p, i) => (
-          <PasswordCard decryptedPassword={p} key={i} />
+          <PasswordCard password={p} key={i} />
         ))}
       </Tbody>
     </Table>
