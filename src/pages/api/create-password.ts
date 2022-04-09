@@ -29,6 +29,7 @@ async function signUpHandler(req: NextApiRequest, res: NextApiResponse) {
 
   await prisma.password.create({
     data: {
+      name: data.name,
       login: data.login,
       website: data.website,
       password: data.password,

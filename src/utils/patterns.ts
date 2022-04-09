@@ -31,6 +31,7 @@ const userCredentialsSchema = Yup.object({
 });
 
 const passwordCreationSchema = Yup.object({
+  name: Yup.string().required('A name is required'),
   website: Yup.string().url('Website must be a valid URL').notRequired(),
   login: Yup.string().required('A login is required'),
   password: Yup.string().required('A password is required'),

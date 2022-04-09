@@ -14,9 +14,11 @@ import { fetcher } from '@utils/fetcher';
 import useSWR from 'swr';
 import { Password } from '@prisma/client';
 
+const GET_PASSWORDS_ENDPOINT = '/api/get-passwords';
+
 function PasswordsDisplay() {
   const { data: passwords, error } = useSWR<Password[]>(
-    '/api/get-passwords',
+    GET_PASSWORDS_ENDPOINT,
     fetcher
   );
   const [filter, setFilter] = useState<string>();

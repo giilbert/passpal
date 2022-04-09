@@ -11,6 +11,7 @@ function PasswordTable({ filteredPasswords }: PasswordTableProps) {
     <Table variant="striped" colorScheme="orange">
       <Thead>
         <Tr>
+          <Th>Name</Th>
           <Th>Login</Th>
           <Th>Website</Th>
         </Tr>

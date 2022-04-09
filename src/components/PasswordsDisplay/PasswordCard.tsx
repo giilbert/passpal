@@ -8,7 +8,7 @@ interface PasswordCardProps {
 }
 
 function PasswordCard({ password }: PasswordCardProps) {
-  const { website, login } = password;
+  const { name, website, login } = password;
   const { setSidePasswordDisplay } = useContext(PageContext);
 
   return (
@@ -20,6 +20,7 @@ function PasswordCard({ password }: PasswordCardProps) {
       transition="box-shadow 500ms cubic-bezier(0.33, 1, 0.68, 1)"
       onClick={() => setSidePasswordDisplay(password)}
     >
+      <Td>{name}</Td>
       <Td>{login}</Td>
       <Td>{website}</Td>
     </Tr>

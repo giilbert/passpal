@@ -1,14 +1,22 @@
-import { CloseIcon, CopyIcon, EditIcon, ViewIcon } from '@chakra-ui/icons';
+import {
+  CloseIcon,
+  CopyIcon,
+  EditIcon,
+  ExternalLinkIcon,
+  ViewIcon,
+} from '@chakra-ui/icons';
 import {
   Box,
   Button,
   Center,
   createStandaloneToast,
+  Divider,
   Heading,
   Input,
   InputGroup,
   InputLeftAddon,
   InputRightElement,
+  Link,
   ScaleFade,
   useBreakpointValue,
   useOutsideClick,
@@ -69,10 +77,19 @@ function SidePasswordDisplay() {
   );
 }
 
-const Content = ({ website, login, password }: Password) => {
+const Content = ({ name, website, login, password }: Password) => {
   return (
     <>
-      <Heading my="5">{website}</Heading>
+      <Heading my="5">{name}</Heading>
+
+      {website !== '' && (
+        <>
+          <Link href={website} isExternal textColor="teal.400">
+            Open Website <ExternalLinkIcon />
+          </Link>
+          <Divider my="4" />
+        </>
+      )}
 
       {/* login info */}
       <InputGroup size="md">

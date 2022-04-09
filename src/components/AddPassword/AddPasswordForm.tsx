@@ -24,6 +24,7 @@ function AddPasswordForm({ close }: { close: () => void }) {
   return (
     <Formik
       initialValues={{
+        name: '',
         website: '',
         login: '',
         password: '',
@@ -54,6 +55,20 @@ function AddPasswordForm({ close }: { close: () => void }) {
     >
       {({ errors, isSubmitting, touched }) => (
         <Form>
+          <Field name="name">
+            {({ field }) => (
+              <FormControl
+                isInvalid={errors.name && touched.name}
+                mb="4"
+                isRequired
+              >
+                <FormLabel htmlFor="name">Name</FormLabel>
+                <Input {...field} id="name" />
+                <FormErrorMessage>{errors.name}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+
           <Field name="website">
             {({ field }) => (
               <FormControl isInvalid={errors.website && touched.website} mb="4">

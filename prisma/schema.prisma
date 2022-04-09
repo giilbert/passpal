@@ -22,7 +22,8 @@ model Password {
   id       Int    @id @default(autoincrement())
   userId   Int
   user     User   @relation(fields: [userId], references: [id])
-  website  String
+  website  String @default("")
+  name     String @default("")
   login    String
   // ENCRYPTED!!
   password String @db.Text
