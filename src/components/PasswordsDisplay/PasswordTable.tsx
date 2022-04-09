@@ -1,6 +1,5 @@
 import { Table, Tbody, Th, Thead, Tr } from '@chakra-ui/react';
 import { Password } from '@prisma/client';
-import { DecryptedPassword } from '@utils/types/DecryptedPassword';
 import PasswordCard from './PasswordCard';
 
 interface PasswordTableProps {

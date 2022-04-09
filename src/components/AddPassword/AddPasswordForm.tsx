@@ -9,11 +9,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { getMasterPassword } from '@components/MasterPasswordPrompt/getMasterPassword';
-import {
-  decodePassword,
-  decryptPassword,
-  encryptPassword,
-} from '@utils/passwordEncryption';
+import { encryptPassword } from '@utils/passwordEncryption';
 import { passwordCreationSchema } from '@utils/patterns';
 import axios from 'axios';
 import { Field, Form, Formik } from 'formik';

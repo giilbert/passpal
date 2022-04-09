@@ -4,7 +4,6 @@ import Navbar from '@components/Navbar';
 import PasswordsDisplay from '@components/PasswordsDisplay';
 import SidePasswordDisplay from '@components/SidePasswordDisplay';
 import { Password } from '@prisma/client';
-import { DecryptedPassword } from '@utils/types/DecryptedPassword';
 import { GetServerSideProps } from 'next';
 import { getSession } from 'next-auth/react';
 import { createContext, Dispatch, SetStateAction, useState } from 'react';

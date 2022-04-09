@@ -8,7 +8,6 @@ import {
   Text,
 } from '@chakra-ui/react';
 import AddPassword from '@components/AddPassword';
-import { DecryptedPassword } from '@utils/types/DecryptedPassword';
 import { useState } from 'react';
 import PasswordTable from './PasswordTable';
 import { fetcher } from '@utils/fetcher';

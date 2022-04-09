@@ -3,22 +3,18 @@ import {
   Box,
   Button,
   Center,
-  Code,
   createStandaloneToast,
   Heading,
   Input,
   InputGroup,
   InputLeftAddon,
-  InputRightAddon,
   InputRightElement,
   ScaleFade,
-  Slide,
   useBreakpointValue,
   useOutsideClick,
 } from '@chakra-ui/react';
 import { Password } from '@prisma/client';
 import { decryptPassword } from '@utils/passwordEncryption';
-import { DecryptedPassword } from '@utils/types/DecryptedPassword';
 import { PageContext } from 'pages/app';
 import { useContext, useRef } from 'react';
 

@@ -1,5 +1,4 @@
-import MasterPasswordPrompt, { trigger } from '.';
-import { createPortal, render } from 'react-dom';
+import { trigger } from '.';
 import { EventEmitter } from 'events';
 
 // master password will be stored IN-MEMORY
@@ -15,7 +14,6 @@ async function getMasterPassword() {
       return;
     }
   }
-
 
   return masterPassword;
 }

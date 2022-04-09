@@ -1,18 +1,6 @@
-import {
-  Button,
-  Center,
-  Container,
-  Divider,
-  Heading,
-  Input,
-  Text,
-  Link,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-} from '@chakra-ui/react';
+import { Center, Container, Divider, Heading, Link } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
-import { getSession, signIn } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 import NextLink from 'next/link';
 import SignInForm from '@components/SignInForm';
 

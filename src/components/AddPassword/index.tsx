@@ -7,7 +7,6 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  ModalFooter,
 } from '@chakra-ui/react';
 import AddPasswordForm from './AddPasswordForm';
 

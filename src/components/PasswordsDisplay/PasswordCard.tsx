@@ -1,6 +1,5 @@
 import { Td, Tr } from '@chakra-ui/react';
 import { Password } from '@prisma/client';
-import { DecryptedPassword } from '@utils/types/DecryptedPassword';
 import { PageContext } from 'pages/app';
 import { useContext } from 'react';
 
